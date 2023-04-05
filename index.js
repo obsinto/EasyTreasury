@@ -3,8 +3,7 @@ require('dotenv').config()
 const pup = require("puppeteer");
 const url = "https://autoatendimento2.bb.com.br/apf-apj-acesso/";
 const chaveJ = process.env.CHAVEJ
-const passwd=process.env.PASSWD
-const passwd2 = process.env.PASSWD2
+const passwd = process.env.PASSWD
 const contas = ["115700-0", '112399-8'];
 
 (async () => {
@@ -28,13 +27,14 @@ await page.click('button[alt = "ChaveJ"]')
 
 await page.waitForSelector('#identificacaoUsuario');
 await page.type("#identificacaoUsuario", chaveJ);
-
 await page.click("#botaoEnviar")
 
-//await page.waitForNavigation()
+await page.waitForTimeout(10000)
 await page.waitForSelector('#senhaUsuario');
-//await page.waitForTimeout(4000)
-await page.type( '#senhaUsuario', '55568');
+await page.type("#senhaUsuario", passwd);
+await page.click("#botaoEnviar")
+
+
 } catch (error) {
 console.error('Ocorreu um erro:', error)
 }
